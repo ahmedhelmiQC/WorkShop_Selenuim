@@ -19,11 +19,11 @@ public class Task7 {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
     }
-
+/*
     protected static void addToCart()
     {
       List<WebElement> products = driver.findElements(By.cssSelector("h4.product-name"));
-        List<String> Items = new ArrayList<>(Arrays.asList("Cucumber", "Carrot", "Cauliflower"));
+        List<String> Items = new ArrayList<>(Arrays.asList("Brocolli", "Beetroot", "Beans"));
 
         for (int i = 0; i < products.size(); i++) {
             String productsName = products.get(i).getText();
@@ -31,7 +31,7 @@ public class Task7 {
             {
                 if (productsName.contains(Items.get(item)))
                 {
-                    driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click();
+                    driver.findElements(By.xpath("//div[@class='product-action']/button")).get(i).click();
                     break;
                 }
             }
@@ -39,6 +39,24 @@ public class Task7 {
         }
 
     }
+
+ */
+
+    protected static void addToCart(String [] ProductsNeeded)
+    {
+        List<WebElement> products = driver.findElements(By.cssSelector("h4.product-name"));
+        for (int i = 0; i < products.size(); i++) {
+            String ProductsName = products.get(i).getText();
+            List itemsList = Arrays.asList(ProductsNeeded);
+            System.out.println(itemsList);
+            if(itemsList.contains(itemsList))
+            {
+                driver.findElements(By.xpath("//div[@class='product-action']/button")).get(i).click();
+            }
+
+        }
+    }
+
 
     protected static void openCartItem()
     {
@@ -53,7 +71,7 @@ public class Task7 {
         promoCode.sendKeys(promocode);
         driver.findElement(By.className("promoBtn")).click();
        WebElement promomassegevalid= driver.findElement(By.xpath(".//span[text()='Code applied ..!']"));
-        System.out.println(promomassegevalid);
+        System.out.println(promomassegevalid.getText());
         promomassegevalid.isDisplayed();
     }
 
@@ -65,9 +83,10 @@ public class Task7 {
     public static void main(String[] args)
     {
         setup();
-        addToCart();
-        openCartItem();
-      //  applyPromoCode("rahulshettyacademy");
-       // placeOrder();
+        String [] ProductsNeeded= {"Brocolli - 1 Kg", "Beetroot", "Beans"};
+        addToCart(ProductsNeeded);
+//        openCartItem();
+//        applyPromoCode("rahulshettyacademy");
+//       placeOrder();
     }
 }
